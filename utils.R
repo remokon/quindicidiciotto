@@ -13,6 +13,8 @@ library(ggplot2, lib.loc = lp)
 
 standard = 3857
 
+httr::set_config(httr::config(http_version = 0))
+
 # Get Stamen map
 focused_stam_map <- function(limits, mode = "toner-background", zoom = 7){
   selection_borders <- c(bottom  = limits$l_lat,

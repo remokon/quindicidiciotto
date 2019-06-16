@@ -11,9 +11,9 @@ dimensioni_mapona <- limiti_grandi$h_lat - limiti_grandi$l_lat
 cnames <- meio_posissioni(sf_ven, paroni = i_mejo)
 
 go <- ggplot() +
-  # annotation_map_tile(type = "stamenwatercolor", zoom = 10) +
-  geom_sf(data = sf_ven, mapping = aes(fill = coeore), alpha = .10, inherit.aes = FALSE) +
-  # geom_sf(data = sf_ven, fill = "#fafafa", inherit.aes = FALSE) +
+  annotation_map_tile(type = "stamenwatercolor", zoom = 9) +
+  # geom_sf(data = sf_ven, mapping = aes(fill = coeore), alpha = .10, inherit.aes = FALSE) +
+  geom_sf(data = sf_ven, fill = "#fafafa", inherit.aes = FALSE) +
   geom_sf(data = sf_ven %>% filter(paron_cd %in% i_mejo), mapping = aes(fill = coeore)) +
   geom_sf(data = ven_doug %>% filter(paron_cd %in% i_mejo), fill = "#000000", colour = "transparent", inherit.aes = FALSE) +
   geom_sf(data = sf_ven_, fill = "transparent",  color = "#717171") +
@@ -27,7 +27,7 @@ go <- ggplot() +
                    family = "mono",
                    size = 6,
                    fontface = "bold",
-                   force = 10,
+                   force = 140,
                    alpha = .85,
                    seed = 1991) +
   scale_fill_identity() + guides(color = FALSE) +
@@ -44,7 +44,7 @@ go <- ggplot() +
                     ymin = limiti_grandi$l_lat - dimensioni_mapona * .03, ymax = limiti_grandi$l_lat + dimensioni_mapona * .05
 )
 
-ggsave("img/globae_orario_11.png", plot = go, width=10, height=10,
+ggsave("img/globae_orario.png", plot = go, width=10, height=10,
        units="in", dpi=200)
 
-rg = POST(url = glue("https://graph.facebook.com/v3.1/{page_id}/photos"), body = list(access_token = TOKEN, caption = scrita, filedata = upload_file("img/globae_orario_11.png")))
+rg = POST(url = glue("https://graph.facebook.com/v3.1/{page_id}/photos"), body = list(access_token = TOKEN, caption = scrita, filedata = upload_file("img/globae_orario.png")))
