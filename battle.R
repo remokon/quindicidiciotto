@@ -47,7 +47,6 @@ dimensioni_mapeta <- limits$h_lat - limits$l_lat
 emoji = ifelse(length(wl$wl) > 2, "\U001F525", "")
 
 base <- ggplot()  +
-  annotation_map_tile(type = "osm", zoom = 7) +
   geom_sf(data = sf_ven, fill = "#fafafa", inherit.aes = FALSE) +
   geom_sf(data = sf_ven, mapping = aes(fill = coeore),
           alpha = others_alpha) +
