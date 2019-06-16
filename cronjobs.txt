@@ -1,0 +1,2 @@
+*/10 * * * * Rscript quindicidiciotto/main.R
+55 7,12,19 * * * Rscript quindicidiciotto/update.R
