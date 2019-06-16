@@ -7,7 +7,6 @@ library(glue, lib.loc = lp)
 library(ggmap, lib.loc = lp)
 library(ggspatial, lib.loc = lp) 
 library(ggthemes, lib.loc = lp) 
-library(rgeos, lib.loc = lp)
 library(ggrepel, lib.loc = lp) 
 library(ggplot2, lib.loc = lp) 
 
