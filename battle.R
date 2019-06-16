@@ -62,7 +62,6 @@ base <- ggplot()  +
 if(length(vinti)) base <- base +
   geom_sf(data = ven_doug_rossi,
           fill = "#FF2211",
-          # fill = "transparent",
           alpha = full_alpha, colour = "transparent")
 
 g <- base +
@@ -75,17 +74,12 @@ g <- base +
     paron = ifelse(unique(paron_cd) == el_paron, paste0(emoji, unique(paron)), unique(paron)), long = mean(c_long), name_lat = mean(c_lat),
     label_fill = ifelse(unique(paron_cd) == el_paron, "#00924b", ifelse(unique(paron_cd) %in% biancheti, "#2E4053", "#AA1111"))
   ), aes(long, name_lat,
-         # color = label_color,
          fill = label_fill,
          label = paron
   ),
   segment.colour = "antiquewhite",
   color = "antiquewhite",
-  # nudge_x = .15,
   box.padding = 0.5,
-  # nudge_y = .15,
-  # ylim = c(limits$h_lat - (limits$h_lat - limits$l_lat)*.32, NA),
-  # direction = "y",
   segment.size = 1.2,
   arrow = arrow(length = unit(0.015, "npc"), ends = "last", type = "closed"),
   family = "mono",
@@ -96,7 +90,6 @@ g <- base +
   force = v_force,
   label.size = .9,
   label.padding = .5) +
-  # force_pull = v_force) +
   scale_fill_identity() + guides(fill = FALSE, color = FALSE) +
   coord_sf(xlim = c(limits$l_lon, limits$h_lon),  ylim = c(limits$l_lat, limits$h_lat), datum=NA) +
   ggmap::theme_nothing() + theme(panel.grid.major = element_line(colour = 'transparent')) +
@@ -107,9 +100,9 @@ g <- base +
                     ymin = limits$l_lat - dimensioni_mapeta * .03, ymax = limits$l_lat + dimensioni_mapeta * .05
                     )
 
-tempo = substring(as.character(Sys.time()), first = 1, last = 19)
-filename = gsub("\\s{1,}|[-]|[:]", "_", paste0("img/", i, "_", tempo,".png"))
-# filename = "img/ultimaddd.png"
+# tempo = substring(as.character(Sys.time()), first = 1, last = 19)
+# filename = gsub("\\s{1,}|[-]|[:]", "_", paste0("img/", i, "_", tempo,".png"))
+filename = "img/ultima.png"
 ggsave(filename, plot = g,  width=10, height=10,
        units="in", dpi=200)
 
@@ -133,13 +126,12 @@ scrita_temp = gsub("\\s{2,10}", " ", scrita_temp)
 bd = bea_data(format(sta_data, "%d-%m-%Y"))
 scrita_finae = glue("{bd} \n\n{scrita_temp}")
 
-# print(scrita_finae)
 df_ <- df_dopo
 sf_ven <- sf_ven_dopo
 ven_doug <- ven_doug_dopo
 
-# r = POST(url = glue("https://graph.facebook.com/v3.1/{page_id}/photos"), body = list(access_token = TOKEN, caption = scrita_finae, filedata = upload_file(filename)))
+r = POST(url = glue("https://graph.facebook.com/v3.1/{page_id}/photos"), body = list(access_token = TOKEN, caption = scrita_finae, filedata = upload_file(filename)))
 
 sta_data = sta_data + 1; i = i + 1
-rm(base, g)
+rm(base, g, df_dopo, sf_ven_dopo, ven_doug_dopo)
   
