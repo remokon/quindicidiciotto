@@ -1,8 +1,13 @@
-source("utils.R")
-load("current.RData")
+source("~/quindicidiciotto/utils.R")
+load("~/quindicidiciotto/current.RData")
 
 agiornamenti = df_ %>% distinct(paron, comune) %>% group_by(paron) %>% summarise(n = n()) %>% arrange(desc(n)) %>% filter(n > 1) %>% head(7)
 scrita = agiornamenti_scrita(agiornamenti)
+
+fc <- file("~/quindicidiciotto/img/globae_orario.txt")
+writeLines(scrita, fc)
+close(fc)
+
 i_mejo = df_ %>% distinct(paron_cd, comune) %>% group_by(paron_cd) %>% summarise(n = n()) %>% arrange(desc(n)) %>% filter(n > 1) %>% head(7) %>% getElement("paron_cd")
 
 limiti_grandi = damei_quadrati(limits_tot)
@@ -44,7 +49,5 @@ go <- ggplot() +
                     ymin = limiti_grandi$l_lat - dimensioni_mapona * .03, ymax = limiti_grandi$l_lat + dimensioni_mapona * .05
 )
 
-ggsave("img/globae_orario.png", plot = go, width=10, height=10,
+ggsave("~/quindicidiciotto/img/globae_orario.png", plot = go, width=10, height=10,
        units="in", dpi=200)
-
-rg = POST(url = glue("https://graph.facebook.com/v3.1/{page_id}/photos"), body = list(access_token = TOKEN, caption = scrita, filedata = upload_file("img/globae_orario.png")))

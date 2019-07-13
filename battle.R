@@ -1,4 +1,4 @@
-prof_pic = png::readPNG("img/prof_pic.png")
+prof_pic = png::readPNG("~/quindicidiciotto/img/prof_pic.png")
 coord_fctr = 3e4
 m     = .2*coord_fctr
 ratio = 1.55
@@ -101,7 +101,7 @@ g <- base +
 
 # tempo = substring(as.character(Sys.time()), first = 1, last = 19)
 # filename = gsub("\\s{1,}|[-]|[:]", "_", paste0("img/", i, "_", tempo,".png"))
-filename = "img/ultima.png"
+filename = "~/quindicidiciotto/img/ultima.png"
 ggsave(filename, plot = g,  width=10, height=10,
        units="in", dpi=200)
 
@@ -125,11 +125,14 @@ scrita_temp = gsub("\\s{2,10}", " ", scrita_temp)
 bd = bea_data(format(sta_data, "%d-%m-%Y"))
 scrita_finae = glue("{bd} \n\n{scrita_temp}")
 
+fc <- file("~/quindicidiciotto/img/ultima.txt")
+writeLines(scrita_finae, fc)
+close(fc)
+
 df_ <- df_dopo
 sf_ven <- sf_ven_dopo
 ven_doug <- ven_doug_dopo
 
-r = POST(url = glue("https://graph.facebook.com/v3.1/{page_id}/photos"), body = list(access_token = TOKEN, caption = scrita_finae, filedata = upload_file(filename)))
 
 sta_data = sta_data + 1; i = i + 1
 rm(base, g, df_dopo, sf_ven_dopo, ven_doug_dopo)
