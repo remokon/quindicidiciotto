@@ -8,7 +8,7 @@ fc <- file("~/quindicidiciotto/img/globae_orario.txt")
 writeLines(scrita, fc)
 close(fc)
 
-i_mejo = df_ %>% distinct(paron_cd, comune) %>% group_by(paron_cd) %>% summarise(n = n()) %>% arrange(desc(n)) %>% filter(n > 1) %>% head(7) %>% getElement("paron_cd")
+i_mejo = agiornamenti %>% getElement("paron_cd")
 
 limiti_grandi = damei_quadrati(limits_tot)
 dimensioni_mapona <- limiti_grandi$h_lat - limiti_grandi$l_lat
