@@ -201,10 +201,10 @@ dame_comuni_par_longo <- function(vinti, p, df){
 
 # faghe l'asctag
 
-asctag <- function(str){
-  no_spassi = gsub("\\s|[']", "", tolower(str))
-  out = paste0("#", no_spassi)
-  return(out)
+asctag <- function(s){
+  no_spassi = gsub("\\s|[']", "", tolower(s))
+  s = paste0("#", no_spassi)
+  return(s)
 }
 
 # scrite bee pai batui come mesajo
@@ -215,8 +215,8 @@ batui <- function(vinti, paroni_dei_vinti, df){
   if(lp > 1) {
     for(p in paroni_dei_vinti[-length(paroni_dei_vinti)]){
       b = dame_comuni_par_longo(vinti, p, df)
-      tra_parentesi = ifelse(b != com_cd$comune[p], com_cd$comune[p], "👑")
-      out = paste0(out, asctag(b), " (", asctag(tra_parentesi), "), ")
+      tra_parentesi = ifelse(b != com_cd$comune[p], asctag(com_cd$comune[p]), "\U001F451")
+      out = paste0(out, asctag(b), " (", tra_parentesi, "), ")
     }
     out = paste0(out, "e ")
   }
@@ -224,15 +224,15 @@ batui <- function(vinti, paroni_dei_vinti, df){
   b = dame_comuni_par_longo(vinti, 
                             ultimo,
                             df)
-  tra_parentesi = ifelse(b != com_cd$comune[ultimo], com_cd$comune[ultimo], "👑")
+  tra_parentesi = ifelse(b != com_cd$comune[ultimo], com_cd$comune[ultimo], "\U001F451")
   out = paste0(out, asctag(b), " (", asctag(tra_parentesi), ")")
   return(out)
 } 
 
 sparii <- function(prima, dopo){
   out = ""
-  paroni_prima <- prima %>% distinct(paron) %>% getElement("paron")
-  paroni_dopo <- dopo %>% distinct(paron) %>% getElement("paron")
+  paroni_prima <- prima %>% distinct(paron) %>% getElement("paron") %>% asctag
+  paroni_dopo <- dopo %>% distinct(paron) %>% getElement("paron") %>% asctag
   morti = setdiff(paroni_prima, paroni_dopo)
   
   if(length(morti) > 0){

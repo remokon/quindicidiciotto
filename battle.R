@@ -117,7 +117,7 @@ rimasti = df_dopo %>% distinct(paron_cd) %>% NROW
 morti = (df_ %>% distinct(paron_cd) %>% NROW) - rimasti
 sp = sparii(df_, df_dopo)
 sparii_scrita = ifelse(morti == 0, "", glue(" {ss}: {sp}. Ghen resta {rimasti}"))
-vero_vincitore = df_ %>% filter(comune_cd %in% wl$wl[1]) %>% distinct(paron) %>% getElement("paron")
+vero_vincitore = df_ %>% filter(comune_cd %in% wl$wl[1]) %>% distinct(paron) %>% getElement("paron") %>% asctag
 cossa_se_cata = ifelse(length(vinti) > 1, "i teritori", "'l teritorio")
 canallia = ifelse(length(vinti) < 4, "", interiessioni())
 canallia = ifelse(length(vinti) < 4, "", interiessioni())
