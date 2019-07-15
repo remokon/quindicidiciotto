@@ -202,7 +202,7 @@ dame_comuni_par_longo <- function(vinti, p, df){
 # faghe l'asctag
 
 asctag <- function(str){
-  no_spassi = gsub("\\s|[[:punct:] ]+", "", tolower(str))
+  no_spassi = gsub("\\s|[']", "", tolower(str))
   out = paste0("#", no_spassi)
   return(out)
 }
