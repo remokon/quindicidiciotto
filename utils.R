@@ -199,6 +199,14 @@ dame_comuni_par_longo <- function(vinti, p, df){
                   getElement("comune"), collapse = ", "))
 }
 
+# faghe l'asctag
+
+asctag <- function(str){
+  no_spassi = gsub("\\s|[[:punct:] ]+", "", tolower(str))
+  out = paste0("#", no_spassi, "VG")
+  return(out)
+}
+
 # scrite bee pai batui come mesajo
 
 batui <- function(vinti, paroni_dei_vinti, df){
@@ -208,7 +216,7 @@ batui <- function(vinti, paroni_dei_vinti, df){
     for(p in paroni_dei_vinti[-length(paroni_dei_vinti)]){
       b = dame_comuni_par_longo(vinti, p, df)
       tra_parentesi = ifelse(b != com_cd$comune[p], com_cd$comune[p], "👑")
-      out = paste0(out, b, " (", tra_parentesi, "), ")
+      out = paste0(out, asctag(b), " (", asctag(tra_parentesi), "), ")
     }
     out = paste0(out, "e ")
   }
@@ -217,7 +225,7 @@ batui <- function(vinti, paroni_dei_vinti, df){
                             ultimo,
                             df)
   tra_parentesi = ifelse(b != com_cd$comune[ultimo], com_cd$comune[ultimo], "👑")
-  out = paste0(out, b, " (", tra_parentesi, ")")
+  out = paste0(out, asctag(b), " (", asctag(tra_parentesi), ")")
   return(out)
 } 
 
@@ -245,7 +253,6 @@ verbo_vinsere <- function(){
             "se guadagna",
             "ciapa su",
             "cata",
-            "sbarca de prepotensa su",
             "sgrafiña",
             "pètena"
   )
@@ -260,8 +267,7 @@ verbo_sparire <- function(){
             "No vedaren pi'",
             "Scampa par sempre",
             "Se arende",
-            "Buta 'a spugna meritevolmente",
-            "No xe sta' bon de scrivere 'l verbae",
+            "Buta 'a spugna co merito",
             "Fora dai xoghi")
   set.seed(Sys.time())
   return(sample(lista, 1))
@@ -271,7 +277,7 @@ interiessioni <- function(){
   lista = c("Sacranon che disastro!",
             "Maria Vergine che afari!",
             "Dio da Dio, Luce da Luce!",
-            "'na roba che gnanca 'e guere puniche!",
+            "Gnanca 'e guere puniche!",
             "Can dal porco!",
             "Canallia!",
             "Come che i cresse in freta...",
