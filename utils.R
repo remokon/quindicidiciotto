@@ -224,15 +224,15 @@ batui <- function(vinti, paroni_dei_vinti, df){
   b = dame_comuni_par_longo(vinti, 
                             ultimo,
                             df)
-  tra_parentesi = ifelse(b != com_cd$comune[ultimo], com_cd$comune[ultimo], "\U001F451")
-  out = paste0(out, asctag(b), " (", asctag(tra_parentesi), ")")
+  tra_parentesi = ifelse(b != com_cd$comune[ultimo], asctag(com_cd$comune[ultimo]), "\U001F451")
+  out = paste0(out, asctag(b), " (", tra_parentesi, ")")
   return(out)
 } 
 
 sparii <- function(prima, dopo){
   out = ""
-  paroni_prima <- prima %>% distinct(paron) %>% getElement("paron") %>% asctag
-  paroni_dopo <- dopo %>% distinct(paron) %>% getElement("paron") %>% asctag
+  paroni_prima <- prima %>% distinct(paron) %>% getElement("paron") 
+  paroni_dopo <- dopo %>% distinct(paron) %>% getElement("paron")
   morti = setdiff(paroni_prima, paroni_dopo)
   
   if(length(morti) > 0){

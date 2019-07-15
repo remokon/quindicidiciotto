@@ -105,7 +105,7 @@ filename = "~/quindicidiciotto/img/ultima.png"
 ggsave(filename, plot = g,  width=10, height=10,
        units="in", dpi=200)
 
-impeto = ifelse(wl$carico, "\U001F692 #impetodeguera \U001F692: \n\n", "")
+impeto = ifelse(wl$carico, "\U001F692 #impetodeguera \U001F692:\n\n", "")
 set.seed(Sys.time())
 vv = verbo_vinsere()
 set.seed(Sys.time())
