@@ -1,7 +1,7 @@
 source("~/quindicidiciotto/utils.R")
 load("~/quindicidiciotto/current.RData")
 
-agiornamenti = df_ %>% distinct(paron, comune) %>% group_by(paron) %>% summarise(n = n()) %>% arrange(desc(n)) %>% filter(n > 1) %>% head(7)
+agiornamenti = df_ %>% distinct(paron, paron_cd, comune) %>% group_by(paron, paron_cd) %>% summarise(n = n()) %>% arrange(desc(n)) %>% filter(n > 1) %>% head(7)
 scrita = agiornamenti_scrita(agiornamenti)
 
 fc <- file("~/quindicidiciotto/img/globae_orario.txt")
