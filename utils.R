@@ -202,11 +202,13 @@ dame_comuni_par_longo <- function(vinti, p, df){
 # faghe l'asctag
 
 asctag <- function(s){
-  no_spassi = gsub("\\s|[']", "", tolower(s))
-  s = paste0("#", no_spassi)
+  st = strsplit(s, ", ")[[1]]
+  no_spassi = gsub("\\s|[']", "", tolower(st))
+  s = paste0("#", no_spassi, collapse=", ")
   return(s)
 }
 
+asctag <- Vectorize(asctag, "s")
 # scrite bee pai batui come mesajo
 
 batui <- function(vinti, paroni_dei_vinti, df){

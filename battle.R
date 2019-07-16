@@ -105,7 +105,7 @@ filename = "~/quindicidiciotto/img/ultima.png"
 ggsave(filename, plot = g,  width=10, height=10,
        units="in", dpi=200)
 
-impeto = ifelse(wl$carico, "\U001F692 #impetodeguera \U001F692:\n\n", "")
+impeto = ifelse(wl$carico, "\U001F692 #impetodeguera \U001F692:\n", "")
 set.seed(Sys.time())
 vv = verbo_vinsere()
 set.seed(Sys.time())
@@ -116,7 +116,7 @@ rimasti = df_dopo %>% distinct(paron_cd) %>% NROW
 
 morti = (df_ %>% distinct(paron_cd) %>% NROW) - rimasti
 sp = sparii(df_, df_dopo)
-sparii_scrita = ifelse(morti == 0, "", glue(" {ss}: {sp}. Ghen resta {rimasti}"))
+sparii_scrita = ifelse(morti == 0, "", glue(" {ss}: {sp}. Ghen resta {rimasti}."))
 vero_vincitore = df_ %>% filter(comune_cd %in% wl$wl[1]) %>% distinct(paron) %>% getElement("paron") %>% asctag
 cossa_se_cata = ifelse(length(vinti) > 1, "i teritori", "'l teritorio")
 canallia = ifelse(length(vinti) < 4, "", interiessioni())
