@@ -2,7 +2,7 @@ source("~/quindicidiciotto/utils.R")
 load("~/quindicidiciotto/current.RData")
 
 agiornamenti = df_ %>% distinct(paron, paron_cd, comune) %>% group_by(paron, paron_cd) %>% summarise(n = n()) %>% arrange(desc(n)) %>% filter(n > 1) %>% head(7)
-scrita = agiornamenti_scrita(agiornamenti)
+scrita = agiornamenti_scrita(agiornamenti %>% select(-paron_cd))
 
 fc <- file("~/quindicidiciotto/img/globae_orario.txt")
 writeLines(scrita, fc)
@@ -23,16 +23,16 @@ go <- ggplot() +
   geom_sf(data = ven_doug %>% filter(paron_cd %in% i_mejo), fill = "#000000", colour = "transparent", inherit.aes = FALSE) +
   geom_sf(data = sf_ven_, fill = "transparent",  color = "#717171") +
   geom_label_repel(data = cnames, mapping = aes(label = paron, y = c_lat, x = c_long),
-                   segment.colour = "antiquewhite",
-                   fill = "#4B4B5B",
-                   color = "antiquewhite",
+                   segment.colour = "tomato3",
+                   fill = "antiquewhite",
+                   color = "#4B4B5B",
                    box.padding = 0.5,
                    segment.size = 1.2,
                    arrow = arrow(length = unit(0.015, "npc"), ends = "last", type = "closed"),
                    family = "mono",
                    size = 6,
                    fontface = "bold",
-                   force = 140,
+                   force = 10,
                    alpha = .85,
                    seed = 1991) +
   scale_fill_identity() + guides(color = FALSE) +
@@ -48,6 +48,7 @@ go <- ggplot() +
                     xmin = limiti_grandi$l_lon - dimensioni_mapona * .03, xmax = limiti_grandi$l_lon + dimensioni_mapona * .05,
                     ymin = limiti_grandi$l_lat - dimensioni_mapona * .03, ymax = limiti_grandi$l_lat + dimensioni_mapona * .05
 )
-
-ggsave("~/quindicidiciotto/img/globae_orario.png", plot = go, width=10, height=10,
+# ggsave("~/quindicidiciotto/img/globae_orario.png", plot = go, width=10, height=10,
+#        units="in", dpi=200)
+ggsave("img/globae_orario.png", plot = go, width=10, height=10,
        units="in", dpi=200)
